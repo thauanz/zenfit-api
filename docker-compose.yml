@@ -1,0 +1,20 @@
+version: '3'
+services:
+  database:
+    image: postgres
+    environment:
+      PGDATA: /app/data
+      POSTGRES_USER: postgres
+    volumes:
+      - /tmp/data:/app/data
+  api:
+    image: zenfit
+    build:
+      context: .
+    volumes:
+      - $PWD:/app
+    ports:
+      - "3000:3000"
+      - "9292:9292"
+    depends_on:
+      - database
