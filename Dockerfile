@@ -18,7 +18,7 @@ COPY . /app/
 
 RUN ["bundle", "install"]
 
-ENTRYPOINT ["./main.sh"]
+ENTRYPOINT ["./entrypoint.sh"]
 
 CMD ["bundle", "exec", "rails", "server", "-b", "0.0.0.0"]
 
