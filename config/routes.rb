@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
     resources :zentimes
+    resources :users
   end
 
   devise_for :users,
