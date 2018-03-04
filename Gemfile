@@ -7,7 +7,11 @@ end
 
 gem 'rails', '~> 5.1.5'
 gem 'pg', '>= 0.18', '< 2.0'
+gem 'jbuilder', '~> 2.5'
 gem 'puma', '~> 3.7'
+
+gem 'devise', '~> 4.2'
+gem 'jwt'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
@@ -15,6 +19,7 @@ group :development, :test do
 end
 
 group :test do
+  gem 'database_cleaner'
   gem 'factory_bot_rails', '~> 4.0'
   gem 'rails-controller-testing'
   gem 'shoulda-matchers', '~> 3.1'
