@@ -7,7 +7,7 @@ services:
       POSTGRES_USER: postgres
     volumes:
       - /tmp/data:/app/data
-  api:
+  default: &default
     image: zenfit
     build:
       context: .
@@ -18,3 +18,9 @@ services:
       - "9292:9292"
     depends_on:
       - database
+  api:
+    <<: *default
+  specs:
+    <<: *default
+    command:
+      - rspec
