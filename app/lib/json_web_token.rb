@@ -5,9 +5,9 @@ class JsonWebToken < Devise::Strategies::Base
 
   def authenticate!
     return fail! unless claims
-    return fail! unless claims.key?('user_id')
+    return fail! unless claims.key?('id')
 
-    success! User.find_by_id claims['user_id']
+    success! User.find_by_id claims['id']
   end
 
   protected

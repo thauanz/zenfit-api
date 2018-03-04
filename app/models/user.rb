@@ -4,5 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :rememberable, :trackable, :validatable
 
+  has_many :zentimes
+
   validates :name, presence: true
 end

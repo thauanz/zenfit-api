@@ -20,6 +20,7 @@ RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
 
   config.include Request::JsonHelper, type: :request
+  config.include Request::AuthenticateHelper, type: :request
 
   config.filter_rails_from_backtrace!
 
