@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-RSpec.describe 'Api::Users', type: :request do
-  let!(:login_user) { create(:user) }
+RSpec.describe 'when the user login has the role of Regular', type: :request do
+  let!(:login_user) { create(:user, :regular) }
 
   shared_examples_for 'invalid authentication' do
     it { expect(response).to have_http_status(:unauthorized) }
@@ -13,7 +13,7 @@ RSpec.describe 'Api::Users', type: :request do
         get '/api/users', headers: auth_header(login_user)
       end
 
-      it { expect(response).to have_http_status(:ok) }
+      it { expect(response).to have_http_status(:forbidden) }
     end
 
     it_behaves_like 'invalid authentication' do
@@ -24,17 +24,14 @@ RSpec.describe 'Api::Users', type: :request do
   end
 
   context 'GET /api/users/:id' do
-    let(:user) { create(:user) }
+    let(:user) { create(:user, :manager) }
 
     context 'with authentication' do
       before do
         get "/api/users/#{user.id}", headers: auth_header(login_user)
       end
 
-      it { expect(response).to have_http_status(:ok) }
-      it { expect(json_response[:id]).to eq(user.id) }
-      it { expect(json_response[:name]).to eq(user.name) }
-      it { expect(json_response[:email]).to eq(user.email) }
+      it { expect(response).to have_http_status(:forbidden) }
     end
 
     it_behaves_like 'invalid authentication' do
@@ -45,7 +42,7 @@ RSpec.describe 'Api::Users', type: :request do
   end
 
   context 'POST /api/users' do
-    let(:user_attributes) { attributes_for(:user) }
+    let(:user_attributes) { attributes_for(:user, :regular) }
 
     context 'with authentication' do
       before do
@@ -54,32 +51,15 @@ RSpec.describe 'Api::Users', type: :request do
           headers: auth_header(login_user)
       end
 
-      it { expect(response).to have_http_status(:created) }
-
-      it 'assigns the requested user' do
-        expect(assigns(:user)).not_to be_nil
-      end
-
-      it { expect(json_response[:name]).to eq(user_attributes[:name]) }
-      it { expect(json_response[:email]).to eq(user_attributes[:email]) }
+      it { expect(response).to have_http_status(:forbidden) }
     end
 
-    context 'does not insert user' do
-      before do
-        post '/api/users',
-          params: { user: { email: '' } },
-          headers: auth_header(login_user)
-      end
-
-      it { expect(json_response[:errors]).not_to be_blank }
-    end
-
-    it 'does insert new user' do
+    it 'does not insert new user' do
       expect do
         post '/api/users',
           params: { user: user_attributes },
           headers: auth_header(login_user)
-      end.to change(User, :count).from(1).to(2)
+      end.not_to change(User, :count)
     end
 
     it_behaves_like 'invalid authentication' do
@@ -90,7 +70,7 @@ RSpec.describe 'Api::Users', type: :request do
   end
 
   context 'PUT /api/users/:id' do
-    let(:user) { create(:user) }
+    let(:user) { create(:user, :regular) }
 
     context 'with authentication' do
       before do
@@ -99,18 +79,7 @@ RSpec.describe 'Api::Users', type: :request do
           headers: auth_header(login_user)
       end
 
-      it { expect(response).to have_http_status(:ok) }
-      it { expect(json_response[:name]).to eq('Wolverine') }
-    end
-
-    context 'invalid parameters' do
-      before do
-        put "/api/users/#{user.id}",
-          params: { user: { name: '' } },
-          headers: auth_header(login_user)
-      end
-
-      it { expect(json_response[:errors]).not_to be_blank }
+      it { expect(response).to have_http_status(:forbidden) }
     end
 
     it_behaves_like 'invalid authentication' do
@@ -122,7 +91,7 @@ RSpec.describe 'Api::Users', type: :request do
   end
 
   context 'DELETE /api/users/:id' do
-    let!(:user) { create(:user) }
+    let!(:user) { create(:user, :manager) }
 
     context 'with authentication' do
       before do
@@ -130,12 +99,13 @@ RSpec.describe 'Api::Users', type: :request do
           headers: auth_header(login_user)
       end
 
-      it { expect(response).to have_http_status(:no_content) }
+      it { expect(response).to have_http_status(:forbidden) }
     end
 
-    it 'does remove user' do
-      expect { delete "/api/users/#{user.id}", headers: auth_header(login_user) }.to \
-        change(User, :count).from(2).to(1)
+    it 'does not remove user' do
+      expect do
+        delete "/api/users/#{user.id}", headers: auth_header(login_user)
+      end.not_to change(User, :count)
     end
 
     it_behaves_like 'invalid authentication' do

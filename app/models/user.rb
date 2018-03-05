@@ -1,10 +1,12 @@
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :rememberable, :trackable, :validatable
 
-  has_many :zentimes
+  has_many :zentimes, dependent: :destroy
 
-  validates :name, presence: true
+  ROLES = %w(regular manager admin).freeze
+
+  enum role: ROLES
+
+  validates :name, :role, presence: true
 end

@@ -8,5 +8,9 @@ RSpec.describe User, type: :model do
     it { is_expected.to validate_uniqueness_of(:email).case_insensitive }
   end
 
-  it { is_expected.to have_many(:zentimes) }
+  it { is_expected.to have_many(:zentimes).dependent(:destroy) }
+
+  it do
+    is_expected.to define_enum_for(:role).with([:regular, :manager, :admin])
+  end
 end

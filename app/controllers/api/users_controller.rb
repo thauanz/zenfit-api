@@ -1,10 +1,10 @@
 module Api
-  class UsersController < ApplicationController
-    before_action :authenticate_user!
+  class UsersController < ApiController
+    before_action :authorize_user, only: [:index, :create]
     before_action :set_user, only: [:show, :update, :destroy]
 
     def index
-      @users = User.all
+      @users = UserPolicy::Scope.new(current_user, User).resolve
     end
 
     def show; end
@@ -34,11 +34,16 @@ module Api
     private
 
     def set_user
-      @user = User.find(params[:id])
+      @user = User.where(id: params[:id]).first!
+      authorize @user
     end
 
     def user_params
-      params.require(:user).permit(:name, :email, :password)
+      params.require(:user).permit(:name, :email, :password, :role)
+    end
+
+    def authorize_user
+      authorize User
     end
   end
 end

@@ -12,6 +12,7 @@ gem 'puma', '~> 3.7'
 
 gem 'devise', '~> 4.2'
 gem 'jwt'
+gem 'pundit'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

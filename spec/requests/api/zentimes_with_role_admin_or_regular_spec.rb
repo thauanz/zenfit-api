@@ -1,10 +1,12 @@
 require 'rails_helper'
 
-RSpec.describe 'Api::Zentimes', type: :request do
-  let!(:user) { create(:user) }
-
+RSpec.shared_examples_for 'requesting zentimes as' do
   shared_examples_for 'invalid authentication' do
     it { expect(response).to have_http_status(:unauthorized) }
+  end
+
+  shared_examples_for 'zentime does not exist' do
+    it { expect(response).to have_http_status(:not_found) }
   end
 
   context 'GET /api/zentimes' do
@@ -35,6 +37,12 @@ RSpec.describe 'Api::Zentimes', type: :request do
       it { expect(json_response[:id]).to eq(zentime.id) }
       it { expect(json_response[:date_record]).to eq(zentime.date_record.to_s) }
       it { expect(json_response[:time_record]).to eq(zentime.time_record) }
+    end
+
+    it_behaves_like 'zentime does not exist' do
+      before do
+        get '/api/zentimes/99999', headers: auth_header(user)
+      end
     end
 
     it_behaves_like 'invalid authentication' do
@@ -103,6 +111,14 @@ RSpec.describe 'Api::Zentimes', type: :request do
       it { expect(json_response[:date_record]).to eq('2018-03-01') }
     end
 
+    it_behaves_like 'zentime does not exist' do
+      before do
+        put '/api/zentimes/99999',
+          params: { zentime: { date_record: '2018-03-01' } },
+          headers: auth_header(user)
+      end
+    end
+
     context 'invalid parameters' do
       before do
         put "/api/zentimes/#{zentime.id}",
@@ -138,10 +154,28 @@ RSpec.describe 'Api::Zentimes', type: :request do
         change(Zentime, :count).from(1).to(0)
     end
 
+    it_behaves_like 'zentime does not exist' do
+      before do
+        delete '/api/zentimes/99999', headers: auth_header(user)
+      end
+    end
+
     it_behaves_like 'invalid authentication' do
       before do
         delete "/api/zentimes/#{zentime.id}"
       end
     end
+  end
+end
+
+RSpec.describe 'when the user has a role of Admin', type: :request do
+  it_behaves_like 'requesting zentimes as' do
+    let!(:user) { create(:user, :admin) }
+  end
+end
+
+RSpec.describe 'when the user has a role of Regular', type: :request do
+  it_behaves_like 'requesting zentimes as' do
+    let!(:user) { create(:user, :regular) }
   end
 end

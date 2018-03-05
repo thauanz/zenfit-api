@@ -30,4 +30,6 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  not_found: 'Resource not found'
+  pundit:
+    default: 'You cannot perform this action.'

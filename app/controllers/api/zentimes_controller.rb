@@ -1,14 +1,13 @@
 module Api
-  class ZentimesController < ApplicationController
-    before_action :authenticate_user!
+  class ZentimesController < ApiController
+    before_action :authorize_zentime, only: [:index, :create]
     before_action :set_zentime, only: [:show, :update, :destroy]
 
     def index
-      @zentimes = current_user.zentimes.all
+      @zentimes = ZentimePolicy::Scope.new(current_user, Zentime).resolve
     end
 
-    def show
-    end
+    def show; end
 
     def create
       @zentime = current_user.zentimes.build(zentime_params)
@@ -35,11 +34,16 @@ module Api
     private
 
     def set_zentime
-      @zentime = current_user.zentimes.find(params[:id])
+      @zentime = Zentime.where(id: params[:id]).first!
+      authorize @zentime
     end
 
     def zentime_params
       params.require(:zentime).permit(:date_record, :time_record)
+    end
+
+    def authorize_zentime
+      authorize Zentime
     end
   end
 end
