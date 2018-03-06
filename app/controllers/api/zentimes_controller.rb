@@ -5,6 +5,9 @@ module Api
 
     def index
       @zentimes = ZentimePolicy::Scope.new(current_user, Zentime).resolve
+      @zentimes = FilterZentimesByDate.new(@zentimes).search(
+        params_filter.slice(:date_from, :date_to).to_h
+      ) if params_filter[:date_from].present?
     end
 
     def show; end
@@ -40,6 +43,10 @@ module Api
 
     def zentime_params
       params.require(:zentime).permit(:date_record, :time_record)
+    end
+
+    def params_filter
+      params.permit(:date_from, :date_to)
     end
 
     def authorize_zentime

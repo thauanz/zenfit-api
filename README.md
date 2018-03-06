@@ -27,7 +27,7 @@ docker-compose run specs
 * ~Login and Sign up~
 * ~CRUD of Zentimes~
 * ~CRUD of Users~
-* Permissions levels
-* Filter by dates from-to
+* ~Permissions levels~
+* ~Filter by dates from-to~
 * Report on average zen hours spent per week
 

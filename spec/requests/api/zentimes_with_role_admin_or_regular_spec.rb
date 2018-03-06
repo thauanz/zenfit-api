@@ -18,6 +18,29 @@ RSpec.shared_examples_for 'requesting zentimes as' do
       it { expect(response).to have_http_status(:ok) }
     end
 
+    context 'when have to filter the zentime for date record' do
+      let(:date_from) { Date.today - 3 }
+
+      context 'does not have passed the parameter date_to' do
+        before do
+          get "/api/zentimes?date_from=#{date_from}", headers: auth_header(user)
+        end
+
+        it { expect(response).to have_http_status(:ok) }
+      end
+
+      context 'does have passed the parameters date_from and date_to' do
+        let(:date_to) { Date.today }
+
+        before do
+          get "/api/zentimes?date_from=#{date_from}&date_to=#{date_to}",
+              headers: auth_header(user)
+        end
+
+        it { expect(response).to have_http_status(:ok) }
+      end
+    end
+
     it_behaves_like 'invalid authentication' do
       before do
         get '/api/zentimes'

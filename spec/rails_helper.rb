@@ -31,4 +31,8 @@ RSpec.configure do |config|
   config.append_after(:each) do
     DatabaseCleaner.clean
   end
+
+  config.define_derived_metadata(file_path: Regexp.new('/spec/queries/')) do |metadata|
+    metadata[:type] = :query
+  end
 end
