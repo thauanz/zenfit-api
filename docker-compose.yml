@@ -6,7 +6,8 @@ services:
       PGDATA: /app/data
       POSTGRES_USER: postgres
     volumes:
-      - /tmp/data:/app/data
+      - dbdata:/app/data
+
   default: &default
     image: zenfit
     build:
@@ -14,7 +15,7 @@ services:
     volumes:
       - $PWD:/app
     ports:
-      - "3000:3000"
+      - "3001:3001"
       - "9292:9292"
     depends_on:
       - database
@@ -24,3 +25,6 @@ services:
     <<: *default
     command:
       - rspec
+
+volumes:
+  dbdata:

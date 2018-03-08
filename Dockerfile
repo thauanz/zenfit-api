@@ -11,7 +11,7 @@ RUN apt-get update -qq && \
 
 WORKDIR /app
 
-EXPOSE 3000
+EXPOSE 3001
 EXPOSE 9292
 
 COPY . /app/
@@ -20,5 +20,5 @@ RUN ["bundle", "install"]
 
 ENTRYPOINT ["./entrypoint.sh"]
 
-CMD ["bundle", "exec", "rails", "server", "-b", "0.0.0.0"]
+CMD ["bundle", "exec", "rails", "server", "-b", "0.0.0.0", "-p", "3001"]
 
