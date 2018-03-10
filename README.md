@@ -22,6 +22,9 @@ In the project home directory run
 docker-compose run specs
 ```
 
+> The file [postman.json](./postman.json) has to demonstrate how could you request the API.
+> Import this file into your [Postman](https://www.getpostman.com/)
+
 ## Features
 
 * ~Login and Sign up~

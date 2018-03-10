@@ -1,0 +1,523 @@
+{
+	"info": {
+		"name": "zenfit",
+		"_postman_id": "3836e74d-9cf1-4f2a-939f-d9b4f344ad5c",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Zentime",
+			"description": "",
+			"item": [
+				{
+					"name": "Index",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{url_address}}/api/zentimes.json?date_from=2018-03-01&date_to=2018-03-03",
+							"host": [
+								"{{url_address}}"
+							],
+							"path": [
+								"api",
+								"zentimes.json"
+							],
+							"query": [
+								{
+									"key": "date_from",
+									"value": "2018-03-01",
+									"equals": true
+								},
+								{
+									"key": "date_to",
+									"value": "2018-03-03",
+									"equals": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"zentime\": {\n\t\t\"time_record\": 5,\n\t\t\"date_record\": \"01/02/2018\"\n\t}\n}"
+						},
+						"url": {
+							"raw": "{{url_address}}/api/zentimes.json",
+							"host": [
+								"{{url_address}}"
+							],
+							"path": [
+								"api",
+								"zentimes.json"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Show",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{url_address}}/api/zentimes/1.json",
+							"host": [
+								"{{url_address}}"
+							],
+							"path": [
+								"api",
+								"zentimes",
+								"1.json"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{url_address}}/api/zentimes/1.json",
+							"host": [
+								"{{url_address}}"
+							],
+							"path": [
+								"api",
+								"zentimes",
+								"1.json"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"zentime\": {\n\t\t\"time_record\": 60,\n\t\t\"date_record\": \"04-03-2018\"\n\t}\n}"
+						},
+						"url": {
+							"raw": "{{url_address}}/api/zentimes/1.json",
+							"host": [
+								"{{url_address}}"
+							],
+							"path": [
+								"api",
+								"zentimes",
+								"1.json"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"description": "",
+			"item": [
+				{
+					"name": "Index",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{url_address}}/api/users.json",
+							"host": [
+								"{{url_address}}"
+							],
+							"path": [
+								"api",
+								"users.json"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Show",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{url_address}}/api/users/2.json",
+							"host": [
+								"{{url_address}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"2.json"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{url_address}}/api/users/2.json",
+							"host": [
+								"{{url_address}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"2.json"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"user\": {\n\t\t\"name\": \"Dart Vader\",\n\t\t\"email\": \"vader@zenfit.com\",\n\t\t\"password\": \"123456789\",\n\t\t\"role\": \"manager\"\n\t}\n}"
+						},
+						"url": {
+							"raw": "{{url_address}}/api/users.json",
+							"host": [
+								"{{url_address}}"
+							],
+							"path": [
+								"api",
+								"users.json"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"user\": {\n\t\t\"name\": \"Name\",\n\t\t\"email\": \"name@zenfit.com\",\n\t\t\"role\": \"manager\"\n\t}\n}"
+						},
+						"url": {
+							"raw": "{{url_address}}/api/users/2.json",
+							"host": [
+								"{{url_address}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"2.json"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f75e0301-4436-414a-a2b5-f9b30802ba47",
+						"type": "text/javascript",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setEnvironmentVariable(\"token\", data.token);"
+						]
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"user\": {\n\t\t\"email\": \"yoda@zenfit.com\",\n\t\t\"password\": \"123456789\"\n\t}\n}"
+				},
+				"url": {
+					"raw": "{{url_address}}/api/login.json",
+					"host": [
+						"{{url_address}}"
+					],
+					"path": [
+						"api",
+						"login.json"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Sign up",
+			"request": {
+				"auth": {
+					"type": "bearer"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Access",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"user\": {\n\t\t\"email\": \"thauanz@gmail.com\",\n\t\t\"password\": \"123456789\",\n\t\t\"name\": \"Thauan\"\n\t}\n\t\n}"
+				},
+				"url": {
+					"raw": "{{url_address}}/api/register.json",
+					"host": [
+						"{{url_address}}"
+					],
+					"path": [
+						"api",
+						"register.json"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Update Account",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Access",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"user\": {\n\t\t\"name\": \"Yoda Master\",\n\t\t\"role\": \"admin\",\n\t\t\"current_password\": \"123456789\"\n\t}\n}"
+				},
+				"url": {
+					"raw": "{{url_address}}/api/register.json",
+					"host": [
+						"{{url_address}}"
+					],
+					"path": [
+						"api",
+						"register.json"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
