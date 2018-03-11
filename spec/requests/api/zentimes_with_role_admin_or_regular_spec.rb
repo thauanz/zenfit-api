@@ -169,7 +169,7 @@ RSpec.shared_examples_for 'requesting zentimes as' do
           headers: auth_header(user)
       end
 
-      it { expect(response).to have_http_status(:no_content) }
+      it { expect(response).to have_http_status(:ok) }
     end
 
     it 'does remove zentime' do

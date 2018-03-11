@@ -32,6 +32,7 @@ module Api
 
     def destroy
       @zentime.destroy
+      render json: @zentime, status: :ok
     end
 
     private
