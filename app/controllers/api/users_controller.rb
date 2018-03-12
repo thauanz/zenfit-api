@@ -29,6 +29,7 @@ module Api
 
     def destroy
       @user.destroy
+      render json: @user, status: :ok
     end
 
     private

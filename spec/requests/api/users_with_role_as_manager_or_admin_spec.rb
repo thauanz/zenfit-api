@@ -128,7 +128,7 @@ RSpec.shared_examples_for 'requesting users as' do
           headers: auth_header(login_user)
       end
 
-      it { expect(response).to have_http_status(:no_content) }
+      it { expect(response).to have_http_status(:ok) }
     end
 
     it 'does remove user' do
