@@ -426,7 +426,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"user\": {\n\t\t\"email\": \"yoda@zenfit.com\",\n\t\t\"password\": \"123456789\"\n\t}\n}"
+					"raw": "{\n\t\"user\": {\n\t\t\"email\": \"r2@zenfit.com\",\n\t\t\"password\": \"123456789\"\n\t}\n}"
 				},
 				"url": {
 					"raw": "{{url_address}}/api/login.json",
@@ -513,6 +513,65 @@
 					"path": [
 						"api",
 						"register.json"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Report",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Access",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"user\": {\n\t\t\"name\": \"Yoda Master\",\n\t\t\"role\": \"admin\",\n\t\t\"current_password\": \"123456789\"\n\t}\n}"
+				},
+				"url": {
+					"raw": "{{url_address}}/api/report.json?date_from=&date_to=&user_id=",
+					"host": [
+						"{{url_address}}"
+					],
+					"path": [
+						"api",
+						"report.json"
+					],
+					"query": [
+						{
+							"key": "date_from",
+							"value": "",
+							"equals": true
+						},
+						{
+							"key": "date_to",
+							"value": "",
+							"equals": true
+						},
+						{
+							"key": "user_id",
+							"value": "",
+							"equals": true
+						}
 					]
 				},
 				"description": ""

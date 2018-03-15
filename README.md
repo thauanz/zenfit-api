@@ -32,5 +32,5 @@ docker-compose run specs
 * ~CRUD of Users~
 * ~Permissions levels~
 * ~Filter by dates from-to~
-* Report on average zen hours spent per week
+* ~Report on average zen hours spent per week~
 
